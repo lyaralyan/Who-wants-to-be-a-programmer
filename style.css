@@ -1,0 +1,914 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Armenian:wght@500&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  font-family: sans-serif;
+  font-family: "Noto Sans Armenian", sans-serif;
+  font-family: armenian;
+}
+
+@font-face {
+  font-family: armenian;
+  src: url(assets/fonts/weblysleekuisb.ttf);
+}
+
+body {
+  overflow: hidden;
+}
+
+.game_container {
+  width: 100%;
+  height: 100vh;
+  background: url(assets/pictures/background.jpg) center top / cover;
+  /* animation: 3s cubic-bezier(0.86, 0, 0.07, 1) forwards background-animation
+    paused; */
+}
+
+@keyframes background-animation {
+  0% {
+    background-size: 300%;
+    background-position: left top;
+  }
+  100% {
+    background-size: 100%;
+    background-position: center center;
+  }
+}
+
+:root {
+  --logo-frame-color: #4681b4;
+  --logo-blue: #202345;
+  --logo-black: #000000;
+  --logo-radial: radial-gradient(#2c2b2c, #3c3c3c);
+  --gradient-blue: linear-gradient(45deg, #001647, #4b69bb, #01184e);
+  --answers-clip-path: polygon(
+    10% 0%,
+    90% 0%,
+    100% 50%,
+    90% 100%,
+    10% 100%,
+    0% 50%
+  );
+  --orange: gold;
+}
+
+.logo_concept {
+  width: 230px;
+  height: 230px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-48.2%);
+  top: 13%;
+}
+
+.logo_concept .circle_blue {
+  width: 100%;
+  height: 100%;
+  background: var(--logo-blue);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 3px solid var(--logo-frame-color);
+}
+
+.logo_concept .circle_blue .circle_black {
+  width: 80%;
+  height: 80%;
+  background: var(--logo-black);
+  border: 3px solid var(--logo-frame-color);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.logo_concept .circle_blue .circle_black .circle_radial {
+  width: 95%;
+  height: 95%;
+  background: var(--logo-radial);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.logo_concept .circle_blue .circle_black .circle_radial img {
+  width: 95%;
+  animation: roteting 10s cubic-bezier(0.6, -0.28, 0.735, 0.045) infinite;
+}
+
+@keyframes roteting {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.logo_concept .logo_cubes {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 12px;
+  gap: 0.4rem;
+  z-index: 2;
+}
+
+.logo_concept .logo_cubes .first_cube {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo_concept .logo_cubes .first_cube img {
+  width: 7%;
+}
+
+.logo_concept .logo_cubes .logo_title {
+  color: #fff;
+  font-size: 27px;
+  font-family: sans-serif;
+}
+
+.logo_concept .logo_content_text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  padding: 8px;
+  z-index: 2;
+}
+
+.logo_concept .logo_content_text img {
+  width: 85%;
+}
+
+.question_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  bottom: 0;
+  background: #00000085;
+  backdrop-filter: blur(10px);
+  padding: 1% 0 2% 0;
+}
+
+.question {
+  width: 100%;
+  padding: 1% 2%;
+  background: var(--gradient-blue);
+  min-height: 60px;
+  clip-path: polygon(5% 0, 95% 0, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
+  color: #fff;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.question span {
+  display: inline-block;
+  transition: 0.3s cubic-bezier(0.86, 0, 0.07, 1);
+  transform: translateY(100px);
+}
+
+.line {
+  width: 100%;
+  height: 2px;
+  background: #09215b;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
+.lines_container .line:nth-child(1) {
+  transform: translateY(1px);
+}
+
+.lines_container .line:nth-child(2) {
+  transform: translateY(5px);
+}
+
+.lines_container .line:nth-child(3) {
+  transform: translateY(5px);
+}
+
+.answers_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.answers_container .answers {
+  width: 100%;
+  background: var(--gradient-blue);
+  min-height: 50px;
+  clip-path: var(--answers-clip-path);
+  color: #fff;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+  pointer-events: none;
+  position: relative;
+}
+
+.answers_container .answers span {
+  transition: 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition-delay: calc(var(--i) * 0.2s);
+  transform: translateY(50px);
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.group_name_container {
+  padding: 10px;
+  background: var(--gradient-blue);
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 555;
+  box-shadow: -5px -7px 10px rgba(0, 0, 0, 0.5);
+}
+
+.group_name_container p {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border: 2px solid var(--orange);
+  padding: 10px;
+  color: white;
+  font-size: 12px;
+}
+
+.group_name_container p span {
+  font-size: 18px;
+  color: var(--orange);
+}
+
+.answers_container .answers:hover {
+  box-shadow: 0 0 50px #000 inset;
+}
+
+.answers::before {
+  position: absolute;
+  left: 10%;
+  font-size: 18px;
+  color: var(--orange);
+  z-index: 2;
+}
+
+.answerA::before {
+  content: "Ա.";
+}
+.answerB::before {
+  content: "Բ.";
+}
+.answerC::before {
+  content: "Գ.";
+}
+.answerD::before {
+  content: "Դ.";
+}
+
+.showing_content {
+  transform: translateY(0) !important;
+}
+
+.help_container button {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, #001647, #4b69bb, #01184e);
+  border-radius: 50%;
+  border: 3px solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  color: #fff;
+  cursor: pointer;
+  filter: drop-shadow(0 0 2px white);
+  box-shadow: 0 0 10px 5px #000 inset;
+  transition: 0.5s;
+}
+
+.help_container button:hover {
+  scale: 1.2;
+  filter: drop-shadow(0 0 5px #fff);
+}
+
+.help_container button i {
+  transition: 0.3s;
+}
+
+.help_container button:hover > i {
+  scale: 0.7;
+}
+
+.help_container #fifty {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.help_container {
+  padding: 20px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: absolute;
+}
+
+.call_container {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(45deg, #010b21, #2a3a64, #010b21);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  color: #fff;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.people_list span,
+.phone-icon {
+  cursor: pointer;
+  background: var(--gradient-blue);
+  color: #fff !important;
+}
+
+.phone-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-icon i {
+  color: #010b21;
+  font-size: 20px;
+}
+
+.people_list {
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  background: #000;
+  padding: 20px;
+}
+
+.people_list span {
+  width: 100%;
+  height: 50px;
+  padding: 10px 20px;
+  border: 1px solid #fff;
+  color: #010b21;
+  text-align: center;
+  box-shadow: 0 0 2px 1px #000 inset;
+  transition: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+.people_list span:hover {
+  background: #000;
+  color: #fff;
+}
+
+.people_list span i {
+  color: white !important;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.people_list span i:hover {
+  color: var(--orange) !important;
+}
+
+.people_list span:hover i {
+  opacity: 1;
+}
+
+.active {
+  background: orange !important;
+  color: #fff !important;
+}
+
+.actual_call_member {
+  margin-top: 20px;
+  width: 10%;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 2px white) drop-shadow(0 0 5px white);
+  right: -60px;
+  top: 16px;
+  transition: 0.7s ease-in;
+  animation: 0.5s linear infinite imgg;
+  border: 7px double #fff;
+}
+
+@keyframes imgg {
+  to {
+    filter: drop-shadow(0 0 50px white);
+  }
+}
+
+.call_icon {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.who_calling {
+  color: #fff;
+  text-align: center;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+#true_call_answer_block {
+  transition: 1s;
+}
+
+#wait_text {
+  transition: 0.5s;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.true_call_answer {
+  text-align: center;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: #00000060;
+  padding: 15px;
+  opacity: 0;
+}
+
+#true_call_answer {
+  font-size: 30px;
+  color: var(--orange);
+}
+
+.wait_animation {
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wait_animation span {
+  animation: waiting 0.5s linear infinite alternate calc(var(--circle) * 0.1s);
+  font-size: 70px;
+}
+
+.circles_content {
+  display: flex;
+  gap: 2px;
+}
+
+.circles_content h2 {
+  font-size: 15px !important;
+}
+
+@keyframes waiting {
+  to {
+    scale: 0.2;
+    opacity: 0;
+    color: var(--orange);
+  }
+}
+
+#contiune_game {
+  width: 200px;
+  height: 40px;
+  background: var(--gradient-blue);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 100vw;
+}
+
+#actual_call_person {
+  color: var(--orange);
+  font-size: 25px;
+}
+
+#close_call_container {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.wait {
+  background: rgb(192, 139, 6) !important;
+}
+
+.for_question_line {
+  width: 100%;
+  padding: 0 5%;
+  position: relative;
+}
+
+.for_answers_line {
+  width: 100%;
+  display: flex;
+  position: relative;
+  padding: 0 5%;
+}
+
+.true_animation {
+  animation: true 1s cubic-bezier(0.77, 0, 0.175, 1) 3 forwards;
+}
+
+@keyframes true {
+  0% {
+    background: rgb(3, 43, 3);
+  }
+  20% {
+    background: forestgreen;
+  }
+  40% {
+    background: rgb(3, 43, 3);
+  }
+  60% {
+    background: forestgreen;
+  }
+  80% {
+    background: rgb(3, 43, 3);
+  }
+  100% {
+    background: forestgreen;
+  }
+}
+
+.wrong_animation {
+  animation: wrong 1s cubic-bezier(0.77, 0, 0.175, 1) 3 forwards;
+}
+
+@keyframes wrong {
+  0% {
+    background: rgb(66, 10, 10);
+  }
+  20% {
+    background: darkred;
+  }
+  40% {
+    background: rgb(66, 10, 10);
+  }
+  60% {
+    background: darkred;
+  }
+  80% {
+    background: rgb(66, 10, 10);
+  }
+  100% {
+    background: darkred;
+  }
+}
+
+.users_container {
+  width: 100%;
+  height: 100vh;
+  background: var(--gradient-blue);
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: #fff;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transition: 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.users_container h2 {
+  font-size: 3em;
+}
+
+.users_container > p {
+  width: 40%;
+  text-align: center;
+}
+
+.users_diagram {
+  width: 40%;
+  padding: 20px 5%;
+  height: 50%;
+  background: #0000006b;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  gap: 1rem;
+  border: 6px double;
+}
+
+.diagram {
+  height: 100%;
+  width: 100%;
+  border: 2px solid white;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1rem;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.5) inset;
+}
+
+.diagram_line {
+  width: 100%;
+  height: 0;
+  box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.5) inset;
+  transition: 2s;
+}
+
+#starting_users {
+  width: 250px;
+  height: 45px;
+  background: var(--orange);
+  border-radius: 100vw;
+  cursor: pointer;
+}
+
+#close_users {
+  color: white;
+  cursor: pointer;
+  font-size: 20px !important;
+  background: var(--gradient-blue);
+  width: 200px;
+  height: 45px;
+  border-radius: 100vw;
+  border: 2px solid white;
+  scale: 0;
+  transition: 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.help_container button {
+  pointer-events: none;
+}
+
+#timer {
+  color: var(--orange);
+  font-size: 50px;
+}
+
+.start_game_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 10%;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  transition: 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  color: black;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.start_game_container input {
+  width: 40%;
+  height: 45px;
+  border: 1px solid var(--orange);
+  background: black;
+  border-radius: 100vw;
+  padding-left: 20px;
+  color: white;
+}
+
+.react_logo {
+  width: 40%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  opacity: 0.1;
+  transform: translate(-50%, -50%) scale(1);
+  animation: fliping 15s linear infinite alternate;
+}
+
+@keyframes fliping {
+  to {
+    transform: translate(-50%, -50%) scale(0.8) rotate(360deg);
+    filter: drop-shadow(0 0 5px white);
+  }
+}
+.start_game_container *:not(.react_logo) {
+  position: relative;
+  transition: 1s;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  opacity: 0;
+}
+
+.start_game_container img:not(.react_logo) {
+  width: 40%;
+}
+
+.start_game_container button {
+  width: 200px;
+  height: 40px;
+  background: var(--orange);
+  border-radius: 100vw;
+  cursor: pointer;
+}
+
+.props {
+  font-size: 12px;
+  width: 40%;
+  text-align: center;
+}
+
+.start_game_container h3 {
+  color: gold;
+}
+
+.pdf_file {
+  color: #fff;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 30px;
+  background: red;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.game_over_container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: #00000098;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  backdrop-filter: blur(15px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99999999;
+  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.game_over_container .group_name_container {
+  position: relative;
+  width: 40%;
+  background: #000;
+}
+
+.game_over_container .group_name_container p {
+  font-size: 18px;
+}
+
+.game_over_container .group_name_container p span {
+  font-size: 30px;
+}
+
+.game_over_container button {
+  width: 200px;
+  height: 50px;
+  background: var(--orange);
+  border-radius: 100vw;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info_peoples {
+  display: flex;
+  gap: 1rem;
+}
+
+.info_peoples .people {
+  background: #000;
+  color: #fff;
+  padding: 10px 35px;
+  min-width: 300px;
+  border-radius: 100vw;
+}
+
+@media screen and (max-width: 768px) {
+  .game_over_container {
+    & .group_name_container {
+      right: 0px;
+      width: 100% !important;
+    }
+  }
+  .group_name_container {
+    visibility: hidden;
+  }
+  .for_answers_line {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .question_container {
+    text-align: center;
+  }
+  .call_container {
+    display: none;
+  }
+  .logo_concept {
+    top: 2%;
+    width: 80px;
+    height: 80px;
+  }
+  .logo_title {
+    font-size: 9px !important;
+  }
+  h1 {
+    text-align: center;
+  }
+  .props {
+    width: 100vw;
+    padding: 0 20px;
+  }
+  .start_game_container {
+    width: 100vw;
+    padding: 0 20px;
+
+    & input {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .help_container {
+    width: 100%;
+    flex-direction: row;
+    top: 14%;
+  }
+  .question span {
+    font-size: 13px;
+    padding: 8px;
+  }
+  .answers {
+    padding: 0 !important;
+  }
+  .for_answers_line .line {
+    display: none;
+  }
+  .for_question_line .line {
+    display: none;
+  }
+}
